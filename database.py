@@ -1,8 +1,10 @@
 import sqlite3
 
 
+DATABASE = "./database/sql.db"
+
 # CREATE
-def create_user(database):
+def create_user(database=DATABASE):
     '''
     Creates a new database
     :param database: The name of the database
@@ -44,20 +46,19 @@ def get_user():
         print(row)
 
 
-def get_password(app):
+def get_password(app, username):
     '''
     Gets the password of the app
     :param app: The name of the app
-    :return: The password of the app
     '''
-    password = user.execute(f"SELECT password FROM test WHERE app='{app}'")
+    password = user.execute(f"SELECT password FROM test WHERE app='{app}' AND username='{username}'")
     for row in password:
-        print(row[0])
+        print(f'\nUsername: {username}\nPassword: {row[0]}')
 
 
 # DELETE
-def delete_user():
-    user.execute("DELETE FROM test WHERE username='admin'")
+def delete_user(app, username):
+    user.execute(f"DELETE FROM test WHERE app='{app}' AND username='{username}'")
     user.commit()
 
 
@@ -73,11 +74,3 @@ def close_connection():
         print("Connection closed")
 
 
-if __name__ == "__main__":
-    create_user('sql.db')
-    insert_user('google', 'test', 'test')
-    # get_user()
-    get_password('google')
-
-    # closing connection
-    close_connection()
