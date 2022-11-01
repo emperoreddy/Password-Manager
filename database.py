@@ -1,9 +1,11 @@
 import sqlite3
 
 
-DATABASE = "./database/sql.db"
+DATABASE = r"D:\PROGRAMARE\PYTHON\Learning\Backend\database\sql.db"
 
 # CREATE
+
+
 def create_user(database=DATABASE):
     '''
     Creates a new database
@@ -37,13 +39,18 @@ def insert_user(app, username, password):
 
 
 # SELECT
-def get_user():
+def get_all_passwords():
     '''
     Gets all the elements in the database
     '''
     elements = user.execute('SELECT * FROM test')
-    for row in elements:
-        print(row)
+    result = elements.fetchall()
+    if result[0][0] != 0:
+        for row in result:
+            print(f'App: {row[0]} \tUsername: {row[1]} \t\tPassword: {row[2]}')
+    else:
+        print('No passwords found')
+    print('----------------------------------------------------------')
 
 
 def get_password(app, username):
@@ -51,14 +58,27 @@ def get_password(app, username):
     Gets the password of the app
     :param app: The name of the app
     '''
-    password = user.execute(f"SELECT password FROM test WHERE app='{app}' AND username='{username}'")
-    for row in password:
-        print(f'\nUsername: {username}\nPassword: {row[0]}')
+    elements = user.execute(
+        f"SELECT password FROM test WHERE app='{app}' AND username='{username}'")
+    result = elements.fetchall()
+    if result[0][0] != 0:
+        for row in result:
+            print(f'\nUsername: {username}\nPassword: {row[0]}')
+    else:
+        print('No password found, try to create one')
+    print('----------------------------------------------------------')
+
 
 
 # DELETE
 def delete_user(app, username):
-    user.execute(f"DELETE FROM test WHERE app='{app}' AND username='{username}'")
+    '''
+    Deletes a row from the database
+    :param app: The name of the app
+    :param username: The username of the app
+    '''
+    user.execute(
+        f"DELETE FROM test WHERE app='{app}' AND username='{username}'")
     user.commit()
 
 
@@ -72,5 +92,3 @@ def close_connection():
     if user:
         user.close()
         print("Connection closed")
-
-
