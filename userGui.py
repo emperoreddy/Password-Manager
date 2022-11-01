@@ -52,6 +52,4 @@ def user_choice():
 
 
 if __name__ == "__main__":
-    # db.create_user('sql.db')
-    # db.get_user()
     user_choice()
