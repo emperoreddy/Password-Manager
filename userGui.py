@@ -1,6 +1,18 @@
 import database as db
 
 
+def print_choice_message():
+    print("\nWhat would you like to do? (1-5) ")
+    print('''
+    ----------------------------------------------------------
+    1. Create a new password
+    2. Delete a password
+    3. Get a password
+    4. Get all passwords
+    5. Delete all passwords (WARNING: This will delete all your passwords)
+    ----------------------------------------------------------
+    ''')
+
 def get_credentials():
     app = input('App name: ')
     username = input('Username: ')
@@ -9,18 +21,7 @@ def get_credentials():
 
 def user_choice():
     db.create_user()
-    print("\nWhat would you like to do? (1-5) ")
-    print('----------------------------------------------------------')
-    print('''
-    1. Create a new password
-    2. Delete a password
-    3. Get a password
-    4. Get all passwords
-    5. Delete all passwords (WARNING: This will delete all your passwords)
-    ''')
-    print('----------------------------------------------------------')
-    
-
+    print_choice_message()
     choice = input()
 
     if choice == '1':

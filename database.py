@@ -3,9 +3,12 @@ import sqlite3
 
 DATABASE = r"D:\PROGRAMARE\PYTHON\Learning\Backend\database\sql.db"
 
+
+def database_is_empty(result):
+    return result.__len__() == 0
+
+
 # CREATE
-
-
 def create_user(database=DATABASE):
     '''
     Creates a new database
@@ -45,11 +48,14 @@ def get_all_passwords():
     '''
     elements = user.execute('SELECT * FROM test')
     result = elements.fetchall()
-    if result[0][0] != 0:
+
+    # check if the database is empty
+    if database_is_empty(result):
+        print('No passwords found')
+    else:
         for row in result:
             print(f'App: {row[0]} \tUsername: {row[1]} \t\tPassword: {row[2]}')
-    else:
-        print('No passwords found')
+
     print('----------------------------------------------------------')
 
 
@@ -61,13 +67,14 @@ def get_password(app, username):
     elements = user.execute(
         f"SELECT password FROM test WHERE app='{app}' AND username='{username}'")
     result = elements.fetchall()
-    if result[0][0] != 0:
+
+    # check if the database is empty
+    if database_is_empty(result):
+        print('No password found, try to create one')
+    else:
         for row in result:
             print(f'\nUsername: {username}\nPassword: {row[0]}')
-    else:
-        print('No password found, try to create one')
     print('----------------------------------------------------------')
-
 
 
 # DELETE
