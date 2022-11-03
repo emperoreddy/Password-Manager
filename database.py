@@ -2,14 +2,24 @@ import sqlite3
 
 
 DATABASE = r"D:\PROGRAMARE\PYTHON\Learning\Backend\database\sql.db"
+id_credentials_index = 1
 
 
 def database_is_empty(result):
     return result.__len__() == 0
 
 
+def credentials_username_is_valid(username):
+    elements = user.execute(
+        f"SELECT username FROM credentials WHERE username='{username}'")
+    result = elements.fetchall()
+
+    return not database_is_empty(result)
+
 # CREATE
-def create_user(database=DATABASE):
+
+
+def create_database(database=DATABASE):
     '''
     Creates a new database
     :param database: The name of the database
@@ -27,8 +37,29 @@ def create_user(database=DATABASE):
         user.commit()
 
 
+def create_table_credentials():
+    user.execute(
+        '''
+    CREATE TABLE IF NOT EXISTS credentials
+(
+    user_id  INTEGER primary key autoincrement ,
+    username VARCHAR(50),
+    password VARCHAR(50)
+)
+    ''')
+
+
+def insert_user_credentials(username, password):
+    while credentials_username_is_valid(username):
+        username = input("Username already exists, choose another one: ")
+    else:
+        user.execute(
+            f"INSERT INTO credentials (username, password) VALUES ('{username}', '{password}')")
+        user.commit()
+
+
 # INSERT
-def insert_user(app, username, password):
+def insert_password(app, username, password):
     '''
     Inserts a new row of data into the database
     :param app: The name of the app
@@ -78,7 +109,7 @@ def get_password(app, username):
 
 
 # DELETE
-def delete_user(app, username):
+def delete_username_password(app, username):
     '''
     Deletes a row from the database
     :param app: The name of the app
@@ -89,9 +120,14 @@ def delete_user(app, username):
     user.commit()
 
 
-def delete_all():
+def delete_all_users_passwords():
     user.execute("DELETE FROM test")
     user.commit()
+
+def delete_all_users_credentials():
+    user.execute("DELETE FROM credentials")
+    user.commit()
+
 
 
 # CLOSE CONNECTION
