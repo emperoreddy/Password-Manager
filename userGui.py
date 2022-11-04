@@ -33,41 +33,42 @@ def get_credentials():
 def user_choice_before_login():
     choice_message_before_login()
     choice = input()
+    global login_username
     if choice == '1':
-        # login.login()
-        pass
+        login_username = input('Username: \n')
+        login_password = input('Password: ')
+        
     elif choice == '2':
-        username = input('Username: \n')
-        password = input('Password: ')
-        user = login.create_user(username, password)
+        login_username = input('Username: \n')
+        login_password = input('Password: ')
+    
+        user = login.create_user(login_username, login_password)
         user.register_user()
 
 
 def user_choice_after_login():
-    db.create_database()
     choice_message_after_login()
     choice = input()
 
     if choice == '1':
         credentials = get_credentials()
         password = input('Password: ')
-        # app, username, password
-        db.insert_password(credentials[0], credentials[1], password)
+        db.insert_password(credentials[0], credentials[1], password, login_username) # app, username, password
 
     elif choice == '2':
         credentials = get_credentials()
         db.delete_username_password(
-            credentials[0], credentials[1])  # app, username
+            credentials[0], credentials[1], login_username)  # app, username
 
     elif choice == '3':
         credentials = get_credentials()
-        db.get_password(credentials[0], credentials[1])  # app. username
+        db.get_password(credentials[0], credentials[1], login_username)  # app. username
 
     elif choice == '4':
-        db.get_all_passwords()
+        db.get_all_passwords(login_username)
 
     elif choice == '5':
-        db.delete_all_users_passwords()
+        db.delete_all_users_passwords(login_username)
 
     repeat = input('\nWould you like to do anything else? (y/n) ')
     if repeat == 'y' or repeat == 'Y':
@@ -78,5 +79,6 @@ def user_choice_after_login():
 
 
 if __name__ == "__main__":
-    db.create_database()
+    
     user_choice_before_login()
+    user_choice_after_login()

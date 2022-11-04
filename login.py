@@ -11,21 +11,18 @@ class User():
         self.password = password
         self.id = db.id_credentials_index
         db.create_table_credentials()
+        
 
     def register_user(self):
         db.create_user_credentials(self.username, self.password)
-        db.create_user_password_table(self.username)
+        db.create_database(self.username)
 
     def login_user(self):
         db.get_user_credentials(self.username, self.password)
-        
+
         
 
    
-   
-
-
-
 def create_user(username, password):
     user = User(username, password)
     return user
