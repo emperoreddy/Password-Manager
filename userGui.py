@@ -20,6 +20,8 @@ def choice_message_after_login():
     3. Get a password
     4. Get all passwords
     5. Delete all passwords (WARNING: This will delete all your passwords)
+    6. Logout
+    7. Exit
     ----------------------------------------------------------
     ''')
 
@@ -37,6 +39,12 @@ def user_choice_before_login():
     if choice == '1':
         login_username = input('Username: \n')
         login_password = input('Password: ')
+        user = login.create_user(login_username, login_password)
+        if db.login_credentials_are_valid(login_username, login_password):
+            user_choice_after_login()
+        else:
+            print('Wrong credentials, try again')
+            user_choice_before_login()
         
     elif choice == '2':
         login_username = input('Username: \n')
@@ -44,6 +52,7 @@ def user_choice_before_login():
     
         user = login.create_user(login_username, login_password)
         user.register_user()
+
 
 
 def user_choice_after_login():
@@ -69,6 +78,9 @@ def user_choice_after_login():
 
     elif choice == '5':
         db.delete_all_users_passwords(login_username)
+    
+    elif choice == '6':
+        user_choice_before_login()
 
     repeat = input('\nWould you like to do anything else? (y/n) ')
     if repeat == 'y' or repeat == 'Y':
