@@ -81,6 +81,10 @@ def user_choice_after_login():
     
     elif choice == '6':
         user_choice_before_login()
+    
+    elif choice == '7':
+        print('Thank you for using this program')
+        exit()
 
     repeat = input('\nWould you like to do anything else? (y/n) ')
     if repeat == 'y' or repeat == 'Y':

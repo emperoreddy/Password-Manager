@@ -61,13 +61,7 @@ def create_user_credentials(username, password):
         user.execute(
             f"INSERT INTO credentials (username, password) VALUES ('{username}', '{password}')")
         user.commit()
-
-
-# def create_user_password_table(username):
-#     user.execute(f'''
-#     CREATE TABLE IF NOT EXISTS {login_username}_passwords
-#     ''')
-
+        
 
 # INSERT
 def insert_password(app, username, password, login_username):
