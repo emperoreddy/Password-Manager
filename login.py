@@ -1,6 +1,4 @@
-# TODO create user
 # TODO create login system
-# TODO create register system
 # TODO create a way to change the password of user
 
 import database as db
@@ -15,7 +13,13 @@ class User():
         db.create_table_credentials()
 
     def register_user(self):
-        db.insert_user_credentials(self.username, self.password)
+        db.create_user_credentials(self.username, self.password)
+        db.create_user_password_table(self.username)
+
+    def login_user(self):
+        db.get_user_credentials(self.username, self.password)
+        
+        
 
    
    
@@ -29,9 +33,6 @@ def create_user(username, password):
 
 
 '''
-REGISTER: create a table containing the username and password of the user (credentials table),
-if the username already exists, then the user will be asked to choose another username
-
 LOGIN: check if the user exists
 if yes, check if the password is correct
 if yes, go to the user's table

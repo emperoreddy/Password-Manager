@@ -16,9 +16,16 @@ def credentials_username_is_valid(username):
 
     return not database_is_empty(result)
 
+
+def login_credentials_are_valid(username, password):
+    elements = user.execute(f'''
+    SELECT username, password FROM credentials WHERE username='{username}' AND password='{password}'
+    ''')
+    result = elements.fetchall()
+    return not database_is_empty(result)
+
+
 # CREATE
-
-
 def create_database(database=DATABASE):
     '''
     Creates a new database
@@ -49,13 +56,19 @@ def create_table_credentials():
     ''')
 
 
-def insert_user_credentials(username, password):
+def create_user_credentials(username, password):
     while credentials_username_is_valid(username):
         username = input("Username already exists, choose another one: ")
     else:
         user.execute(
             f"INSERT INTO credentials (username, password) VALUES ('{username}', '{password}')")
         user.commit()
+
+
+def create_user_password_table(username):
+    user.execute(f'''
+    CREATE TABLE IF NOT EXISTS {username}_passwords
+    ''')
 
 
 # INSERT
@@ -108,6 +121,14 @@ def get_password(app, username):
     print('----------------------------------------------------------')
 
 
+def get_user_credentials(username, password):
+    while login_credentials_are_valid(username, password):
+        print("Login successful")
+    else:
+        print("Wrong credentials, try again")
+
+
+
 # DELETE
 def delete_username_password(app, username):
     '''
@@ -124,10 +145,10 @@ def delete_all_users_passwords():
     user.execute("DELETE FROM test")
     user.commit()
 
+
 def delete_all_users_credentials():
     user.execute("DELETE FROM credentials")
     user.commit()
-
 
 
 # CLOSE CONNECTION
