@@ -29,10 +29,3 @@ def create_user(username, password):
     
 
 
-'''
-LOGIN: check if the user exists
-if yes, check if the password is correct
-if yes, go to the user's table
-
-CREATE A NEW PASSWORD: go to the credentials table and change the user's password 
-'''
