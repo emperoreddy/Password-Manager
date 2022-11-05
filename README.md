@@ -41,7 +41,8 @@ This was made with:
 ### Todo in the future
 - [ ] Store passwords into an online database
 - [ ] More user-friendly (using GUI)
-
+- [ ] Change user's passwords
+- [ ] Delete one / all users
 
 
 
