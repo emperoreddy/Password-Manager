@@ -1,6 +1,6 @@
 # Password Manager
 
-**Password manager** is an app used to store different app's passwords with different users, so the password don't interfere with others.
+**Password manager** is an app used to store different app's passwords with different users.
 
 ------------
 
