@@ -7,6 +7,7 @@ def choice_message_before_login():
     ----------------------------------------------------------
     1. Login
     2. Register
+    3. Exit
     ----------------------------------------------------------
     ''')
 
@@ -52,6 +53,10 @@ def user_choice_before_login():
     
         user = login.create_user(login_username, login_password)
         user.register_user()
+
+    elif choice == '3':
+        print('Thank you for using this program')
+        exit()
 
 
 
