@@ -1,7 +1,7 @@
 import sqlite3
+import os
 
-
-DATABASE = r"D:\PROGRAMARE\PYTHON\Learning\Backend\database\sql.db"
+DATABASE = os.getcwd() + r"\database\sql.db"
 id_credentials_index = 1
 
 # CONNECTION 
