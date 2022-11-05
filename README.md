@@ -2,6 +2,8 @@
 
 **Password manager** is an app used to store different app's passwords with different users.
 
+[![asciicast](https://asciinema.org/a/aZjCOwUUdgHxYNIza0TWcR234.svg)](https://asciinema.org/a/aZjCOwUUdgHxYNIza0TWcR234)
+
 ------------
 
 
