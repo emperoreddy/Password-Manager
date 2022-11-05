@@ -7,10 +7,11 @@
 
 ### Usage
 
-* To use the app, you need at least python 3, you can download and install it from the source website [_**here**_](https://www.python.org/downloads/ "*here*").
+* To use the app, you need at least python 3 and pip, you can download and install [_**python**_](https://www.python.org/downloads/ "*python*") from the source website  and [_**pip for windows**_](https://www.geeksforgeeks.org/how-to-install-pip-on-windows/ "*pip for windows*") / [_**pip for linux**_](https://linuxconfig.org/install-pip-on-linux "*pip for linux*").
 
-* After installing, clone this repository
+* After installing python and pip, install sqlite3 with pip and then clone this repository
 ```
+pip install pysqlite3 
 git clone https://github.com/emperoreddy/Password-Manager
 ```
 * Navigate into the created directory and run the python script
