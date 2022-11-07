@@ -1,7 +1,9 @@
 import sqlite3
 import os
 
-DATABASE = os.getcwd() + r"\database\sql.db"
+DATABASE_PATH = r"database\sql.db"
+# DATABASE = os.getcwd() + r"\database\sql.db"
+DATABASE = os.path.join(os.getcwd(), DATABASE_PATH)
 id_credentials_index = 1
 
 # CONNECTION 
